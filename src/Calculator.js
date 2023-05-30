@@ -6,43 +6,49 @@ function Calculator() {
   const [num2, setNum2] = useState('');
   const [result, setResult] = useState('');
 
-  const handleNum1Change = (e) => {
-    setNum1(e.target.value);
+  const handleInputChange = (e, inputName) => {
+    const inputValue = e.target.value;
+    if (inputName === 'num1') {
+      setNum1(inputValue);
+    } else if (inputName === 'num2') {
+      setNum2(inputValue);
+    }
   };
 
-  const handleNum2Change = (e) => {
-    setNum2(e.target.value);
-  };
+  const handleOperation = (operator) => {
+    const number1 = parseFloat(num1);
+    const number2 = parseFloat(num2);
+    let operationResult = '';
 
-  const handleAdd = () => {
-    const sum = parseFloat(num1) + parseFloat(num2);
-    setResult(sum);
-  };
+    switch (operator) {
+      case '+':
+        operationResult = number1 + number2;
+        break;
+      case '-':
+        operationResult = number1 - number2;
+        break;
+      case '*':
+        operationResult = number1 * number2;
+        break;
+      case '/':
+        operationResult = number1 / number2;
+        break;
+      default:
+        break;
+    }
 
-  const handleSubtract = () => {
-    const difference = parseFloat(num1) - parseFloat(num2);
-    setResult(difference);
-  };
-
-  const handleMultiply = () => {
-    const product = parseFloat(num1) * parseFloat(num2);
-    setResult(product);
-  };
-
-  const handleDivide = () => {
-    const quotient = parseFloat(num1) / parseFloat(num2);
-    setResult(quotient);
+    setResult(operationResult);
   };
 
   return (
     <div className="calculator">
-      <input type="number" value={num1} onChange={handleNum1Change} />
-      <input type="number" value={num2} onChange={handleNum2Change} />
+      <input type="number" value={num1} onChange={(e) => handleInputChange(e, 'num1')} />
+      <input type="number" value={num2} onChange={(e) => handleInputChange(e, 'num2')} />
       <div className="buttons">
-        <button onClick={handleAdd}>+</button>
-        <button onClick={handleSubtract}>-</button>
-        <button onClick={handleMultiply}>*</button>
-        <button onClick={handleDivide}>/</button>
+        <button onClick={() => handleOperation('+')}>+</button>
+        <button onClick={() => handleOperation('-')}>-</button>
+        <button onClick={() => handleOperation('*')}>*</button>
+        <button onClick={() => handleOperation('/')}>/</button>
       </div>
       <h3>Result: {result}</h3>
     </div>
