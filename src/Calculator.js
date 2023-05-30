@@ -42,13 +42,16 @@ function Calculator() {
 
   return (
     <div className="calculator">
-      <input type="number" value={num1} onChange={(e) => handleInputChange(e, 'num1')} />
-      <input type="number" value={num2} onChange={(e) => handleInputChange(e, 'num2')} />
+      <h2>Simple Calculator</h2>
+      <div className="input-container">
+        <input type="number" className="input-field" value={num1} onChange={(e) => handleInputChange(e, 'num1')} />
+        <input type="number" className="input-field" value={num2} onChange={(e) => handleInputChange(e, 'num2')} />
+      </div>
       <div className="buttons">
-        <button onClick={() => handleOperation('+')}>+</button>
-        <button onClick={() => handleOperation('-')}>-</button>
-        <button onClick={() => handleOperation('*')}>*</button>
-        <button onClick={() => handleOperation('/')}>/</button>
+        <button className="operation-button" onClick={() => handleOperation('+')}>+</button>
+        <button className="operation-button" onClick={() => handleOperation('-')}>-</button>
+        <button className="operation-button" onClick={() => handleOperation('*')}>*</button>
+        <button className="operation-button" onClick={() => handleOperation('/')}>/</button>
       </div>
       <h3>Result: {result}</h3>
     </div>
